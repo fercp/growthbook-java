@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @see FreeCondition
  */
-@AttributeKey("nor")
+@AttributeKey("$nor")
 public class Nor extends FreeCondition<List<FreeCondition<?>>> {
     /**
      * Takes list of conditions as parameter.

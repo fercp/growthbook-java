@@ -1,7 +1,9 @@
 package com.fersoft.growthbook.condition.relational;
 
+import com.fersoft.growthbook.condition.AttributeKey;
 import com.fersoft.growthbook.condition.DependedCondition;
 
+@AttributeKey("$gte")
 public class Gte<T extends Comparable<T>> extends DependedCondition<T, T> {
     public Gte(T value) {
         super(value);

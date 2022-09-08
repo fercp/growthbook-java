@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fersoft.growtbook.json.test.CasesJsonSource;
-import com.fersoft.growthbook.condition.FreeCondition;
+import com.fersoft.growthbook.condition.Condition;
 import com.fersoft.growthbook.parser.ConditionParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +23,7 @@ class EvalConditionTest {
         });
         Map<String, Object> attributes = objectMapper.convertValue(testNode.get(2), new TypeReference<>() {
         });
-        FreeCondition<?> topCondition = conditionParser.parse(condition);
+        Condition<?, Map<String, Object>> topCondition = conditionParser.parse(condition);
         boolean actual = topCondition.eval(attributes);
         boolean expected = testNode.get(3).asBoolean();
         assertEquals(expected, actual);

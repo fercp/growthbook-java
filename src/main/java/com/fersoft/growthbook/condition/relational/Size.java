@@ -11,25 +11,30 @@ import java.util.List;
  * @param <T> type of attribute list element
  */
 @AttributeKey("$size")
-public class Size<T> extends DependedCondition<Integer, List<T>> {
+public class Size<V, T> extends DependedCondition<V, List<T>> {
     /**
      * Constructor.
      *
-     * @param size size
+     * @param value size
      */
-    public Size(final Integer size) {
-        super(size);
+    public Size(final V value) {
+        super(value);
     }
 
     /**
      * Returns true if size of attribute list is equal to condition value.
+     *
      * @param attribute attribute value list
      * @return comparison result.
      */
     @Override
     public boolean eval(final List<T> attribute) {
         if (attribute != null) {
-            return attribute.size() == value;
+            if (value instanceof Integer) {
+                return attribute.size() == (Integer) value;
+            } else if (value instanceof List) {
+                return ((List<DependedCondition>) value).stream().allMatch(v -> v.eval(attribute.size()));
+            }
         }
         return false;
     }

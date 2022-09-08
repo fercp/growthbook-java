@@ -12,7 +12,7 @@ import java.util.Map;
  *            with attribute object.
  */
 public abstract class FreeCondition<T>
-        extends Condition<T, Map<String, Object>> {
+        extends DependedCondition<T, Map<String, Object>> {
     /**
      * Constructor.
      *

@@ -12,15 +12,15 @@ import java.util.List;
  * @param <X> type of condition value.
  * @param <A> type of attribute which is a List of X.
  */
-@AttributeKey("$elemmatch")
+@AttributeKey("$elemMatch")
 public class ElemMatch<X, A extends List<X>>
-        extends DependedCondition<Condition<?, X>, A> {
+        extends DependedCondition<List<DependedCondition<?, X>>, A> {
     /**
      * Constructor.
      *
      * @param value Condition to be executed against elements in the list
      */
-    public ElemMatch(final Condition<?, X> value) {
+    public ElemMatch(final List<DependedCondition<?, X>> value) {
         super(value);
     }
 
@@ -36,6 +36,6 @@ public class ElemMatch<X, A extends List<X>>
             return false;
         }
 
-        return attribute.stream().anyMatch(value::eval);
+        return attribute.stream().anyMatch(a -> value.stream().allMatch(v -> v.eval(a)));
     }
 }
